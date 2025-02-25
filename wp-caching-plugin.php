@@ -3,7 +3,7 @@
  * Plugin Name: WP Caching Plugin
  * Description: A simple caching plugin with a Vue.js admin panel.
  * Version: 1.0
- * Author: Your Name
+ * Author: Manvendra
  * License: GPL2
  */
 
@@ -46,6 +46,10 @@ function wp_cache_enqueue_admin_scripts() {
         '1.0',
         true
     );
+
+    // Localize script to pass WordPress nonce
+    wp_localize_script('wp-cache-app', 'wpApiSettings', array(
+        'nonce' => wp_create_nonce('wp_rest'),
+    ));
 }
 add_action('admin_enqueue_scripts', 'wp_cache_enqueue_admin_scripts');
-?>
