@@ -1,7 +1,8 @@
 <script setup>
 import { ref, onMounted } from "vue";
 
-const cacheStatus = ref("Loading...");
+const cacheStatus = ref("Checking...");
+const cacheFiles = ref([]);
 
 const fetchCacheStatus = async () => {
   const response = await fetch('/wp-json/wp-cache/v1/status');
@@ -12,9 +13,19 @@ const fetchCacheStatus = async () => {
 onMounted(fetchCacheStatus);
 
 const clearCache = async () => {
-  await fetch('/wp-json/wp-cache/v1/clear', { method: "POST" });
-  cacheStatus.value = "Cache Cleared!";
+  const response = await fetch('/wp-json/wp-cache/v1/clear', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-WP-Nonce": window.wpApiSettings?.nonce || "" // Handle missing nonce gracefully
+    },
+    credentials: "same-origin"
+  });
+
+  const data = await response.json();
+  cacheStatus.value = data.message;
 };
+
 </script>
 
 <template>

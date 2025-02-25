@@ -40,4 +40,4 @@ Built with Vue.js for an easy-to-use WP-Admin interface! 🎨
 
 🔓 Open-source! Modify, share, and improve! 🎉
 
-🚀 Enjoy a faster WordPress experience! Let us know what you’d like next! 🔥
+🚀 Enjoy a faster WordPress experience! Let us know what you’d like next!! 🔥
